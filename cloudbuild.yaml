@@ -22,12 +22,16 @@ steps:
   # Docker Push
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'us-central1-docker.pkg.dev/${PROJECT_ID}/${_REPO_NAME}/helloworld-empathy']
+    env:
+    - '_REPO_NAME=team9'
 
   # Deploy to Cloud Run
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['run', 'deploy', 'helloworld-empathy', 
            '--image=us-central1-docker.pkg.dev/${PROJECT_ID}/${_REPO_NAME}/helloworld-empathy',
            '--region', 'us-central1', '--platform', 'managed']
+    env:
+    - '_REPO_NAME=team9'
 
   # TODO: Get Cloud Run URL
 
