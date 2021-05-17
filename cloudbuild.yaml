@@ -16,24 +16,18 @@ steps:
   # Docker Build
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 
-           'us-central1-docker.pkg.dev/${PROJECT_ID}/${_REPO_NAME}/helloworld-empathy', 
+           'us-central1-docker.pkg.dev/${PROJECT_ID}/team9/helloworld-empathy', 
            '.']
-    env:
-    - '_REPO_NAME=team9'
 
   # Docker Push
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'us-central1-docker.pkg.dev/${PROJECT_ID}/${_REPO_NAME}/helloworld-empathy']
-    env:
-    - '_REPO_NAME=team9'
+    args: ['push', 'us-central1-docker.pkg.dev/${PROJECT_ID}/team9/helloworld-empathy']
 
   # Deploy to Cloud Run
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['run', 'deploy', 'helloworld-empathy', 
-           '--image=us-central1-docker.pkg.dev/${PROJECT_ID}/${_REPO_NAME}/helloworld-empathy',
+           '--image=us-central1-docker.pkg.dev/${PROJECT_ID}/team9/helloworld-empathy',
            '--region', 'us-central1', '--platform', 'managed']
-    env:
-    - '_REPO_NAME=team9'
 
   # TODO: Get Cloud Run URL
 
