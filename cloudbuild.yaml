@@ -18,6 +18,8 @@ steps:
     args: ['build', '-t', 
            'us-central1-docker.pkg.dev/${PROJECT_ID}/${_REPO_NAME}/helloworld-empathy', 
            '.']
+    env:
+    - '_REPO_NAME=team9'
 
   # Docker Push
   - name: 'gcr.io/cloud-builders/docker'
